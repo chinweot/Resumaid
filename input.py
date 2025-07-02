@@ -1,4 +1,5 @@
 import re 
+import time 
 
 # THINGS TO ADD: 
         # turn getting all inputs w database into one command
@@ -10,6 +11,11 @@ import re
 def print_database():
     print("Accessing database...")
     time.sleep(1)
+    print("...")
+    time.sleep(1)
+    print("...")
+
+    # TODO: get list from database 
 
 
 def empty_input(info):
@@ -23,8 +29,26 @@ def valid_email(email):
         print("Invalid email. (ง •̀_•́)ง Put in another one!")
         email = input("> ").strip()
 
+def get_input(prompt):
+    while True:
+        print(prompt)
+        user_input = input("> ").strip()
+
+        if user_input == "DATABASE":
+            print_database()
+            continue
+
+        empty_input(user_input)
+
+        if prompt == "Insert email: ":
+            valid_email(user_input)
+        
+        return user_input
+
+        
+
 def collect_data(): 
-    programName = "[name]"
+    programName = "Resumaid"
     dbCommand = "DATABASE"
 
     # display welcome message + user instructions 
@@ -32,30 +56,12 @@ def collect_data():
     print(f"If you want to access previous resumes/cover letters created, type in {dbCommand}")
 
     # collecting user data via input 
-    print("Insert name: ")
-    name = input("> ").strip()
-    empty_input(name)
-
-    print("Insert email: ")
-    email = input("> ").strip()
-    empty_input(email)
-    valid_email(email)
-
-    print("Insert position that you're applying for: ")
-    position = input("> ").strip()
-    empty_input(position)
-
-    print("If applying to a specific company, insert its name; otherwise leave blank: ")
-    company = input("> ").strip()
-    empty_input(company)
-
-    print("Paste your LinkedIn 'About Me': ")
-    about = input("> ").strip()
-    empty_input(about)
-
-    print("Paste your Linkedin 'Experience': ")
-    exp = input("> ").strip()
-    empty_input(exp)
+    name = get_input("Insert name: ")
+    email = get_input("Insert email: ")
+    position = get_input("Insert position that you're applying for: ")
+    company = get_input("If applying to a specific company, insert its name; otherwise leave blank: ")
+    about = get_input("Paste your LinkedIn 'About Me': ")
+    exp = get_input("Paste your Linkedin 'Experience': ")
 
     user_data = {
         "position": position,

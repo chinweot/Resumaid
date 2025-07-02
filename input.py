@@ -1,6 +1,9 @@
+from database import save_info, print_db 
 import re 
 import time 
 
+
+programName = "Resumaid"
 # THINGS TO ADD: 
         # turn getting all inputs w database into one command
     # need to add in 'DATABASE' command, can access whenever, 
@@ -16,18 +19,20 @@ def print_database():
     print("...")
 
     # TODO: get list from database 
-
+    print_db()
 
 def empty_input(info):
     while len(info) == 0: 
         print("Don't leave this portion blank! (ง •̀_•́)ง")
         info = input("> ").strip()
+    return info 
 
 def valid_email(email):
     email_regex = r'^[A-Za-z0-9_.]+@[a-z]+\.(com|org|net)$'
     while not re.match(email_regex, email): 
         print("Invalid email. (ง •̀_•́)ง Put in another one!")
         email = input("> ").strip()
+    return email 
 
 def get_input(prompt):
     while True:
@@ -38,17 +43,15 @@ def get_input(prompt):
             print_database()
             continue
 
-        empty_input(user_input)
+        user_input = empty_input(user_input)
 
         if prompt == "Insert email: ":
-            valid_email(user_input)
+            user_input = valid_email(user_input)
         
         return user_input
 
-        
-
 def collect_data(): 
-    programName = "Resumaid"
+
     dbCommand = "DATABASE"
 
     # display welcome message + user instructions 
@@ -81,11 +84,27 @@ if __name__ == "__main__":
     while loop: 
         # dict, organized new user data 
         dataList = collect_data() 
+        
+        print("Your data was saved successfully.")
 
         # print out link to resume pdf and cover letter 
+        print("Creating your resume and cover letter...")
+        print("...")
+        time.sleep(1)
 
+        #resume 
+
+        print("...")
+        time.sleep(1)
+        #cover letter 
+
+        print("Would you like to save this resume + cover letter in the database? Y/N")
+        saveCreation = input("> ")
+        if saveCreation == "Y":
+            save_info(dataList) #replace dataList with resume and coverletter 
 
         # prompting for the user to create more  
+        # create loop if does not fit in Y/N 
         print("Would you like to create another resume/letter? Y/N")
         ans = input("> ").strip()
         loop = False if ans == "N" else True 

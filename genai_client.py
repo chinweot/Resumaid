@@ -2,6 +2,7 @@ import os
 import google.generativeai as genai
 from input_cli import collect_data
 from dotenv import load_dotenv
+from pdf_generator import generate_pdf
 
 """
 Generates both resume and cover letter content from LinkedIn input.
@@ -13,7 +14,7 @@ my_api_key = os.getenv("GENAIAPI_KEY") or os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=my_api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-def generate_tailored_resume(about, experience, position, company, job_description):
+def generate_tailored_resume(about, experience, position, company):
     prompt = f"""
 You are a resume and cover letter expert.
 
@@ -46,25 +47,32 @@ Cover Letter:
 
     return resume, cover_letter
 
+
 if __name__ == "__main__":
     data = collect_data()
-
-    job_desc = input("\n Paste the job description you're applying to:\n")
 
     resume, cover_letter = generate_tailored_resume(
         about=data["about"],
         experience=data["exp"],
         position=data["position"],
         company=data["company"],
-        job_description=job_desc
     )
 
-    """
+    pdf_data = {
+        "name": data["name"],
+        "email": data["email"],
+        "position": data["position"],
+        "company": data["company"],
+        "resume": resume,
+        "cover_letter": cover_letter
+    }
 
+    generate_pdf(pdf_data)
+
+    """
     print("\nTailored Resume:\n")
     print(resume)
 
     print("\nTailored Cover Letter:\n")
     print(cover_letter)
-
     """

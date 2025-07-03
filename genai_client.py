@@ -1,6 +1,6 @@
 import os
 import google.generativeai as genai
-from input_cli import collect_data
+from input import collect_data
 from dotenv import load_dotenv
 from pdf_generator import generate_pdf
 
@@ -48,6 +48,7 @@ Cover Letter:
     return resume, cover_letter
 
 
+"""
 if __name__ == "__main__":
     data = collect_data()
 
@@ -69,10 +70,8 @@ if __name__ == "__main__":
 
     generate_pdf(pdf_data)
 
-    """
     print("\nTailored Resume:\n")
     print(resume)
 
     print("\nTailored Cover Letter:\n")
     print(cover_letter)
-    """

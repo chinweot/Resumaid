@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from genai import 
 import os
 import requests
 
@@ -7,7 +8,7 @@ load_dotenv()
 PDFMONKEY_API_KEY = os.getenv("PDFMONKEY_API_KEY")
 PDFMONKEY_TEMPLATE_ID = os.getenv("PDFMONKEY_TEMPLATE_ID")
 
-def generate_pdf(data):
+def generate_pdf(data, resume, cover_letter):
     url = "https://api.pdfmonkey.io/api/v1/documents"
     headers = {
         "Authorization": f"Bearer {PDFMONKEY_API_KEY}",

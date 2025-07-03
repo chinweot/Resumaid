@@ -4,10 +4,8 @@ import os
 
 def get_jobs(position, company=None):
 
-    API_KEY = "e57417e85cmsh091ef9329cd379ep11aefbjsn8bb4545c21fb"
-                
-    print("API KEY FOUND:", API_KEY is not None)
-    print("API_KEY:", API_KEY)
+    API_KEY = os.getenv("RAPIDAPI_KEY")
+
     title_filter = quote(f'"{position}"')
     location_filter = quote('"United States"')
 

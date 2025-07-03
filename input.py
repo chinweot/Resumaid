@@ -1,5 +1,7 @@
 from database import save_info, print_db 
 from linkedin_client import get_jobs
+from pdf_generator import generate_pdf
+from genai_client import generate_tailored_resume
 import re 
 import time 
 
@@ -86,6 +88,8 @@ if __name__ == "__main__":
     while loop: 
         # dict, organized new user data 
         dataList = collect_data() 
+        resume, cover_letter = generate_tailored_resume(about, exp, position, company)
+        
         
         print("Your data was saved successfully.")
 
@@ -95,6 +99,7 @@ if __name__ == "__main__":
         time.sleep(1)
 
         #resume + cover letter PDFMonkey Link 
+        generate_pdf(dataList, resume, cover_letter)
 
         print("Here is a list of jobs you can apply to!")
         get_jobs(dataList['position'], dataList['company'])

@@ -3,8 +3,8 @@ import requests
 import os
 
 def get_jobs(position, company=None):
-
-    API_KEY = "key"
+    API_KEY = "e57417e85cmsh091ef9329cd379ep11aefbjsn8bb4545c21fb"
+    job_str = ""
 
     title_filter = quote(f'"{position}"')
     location_filter = quote('"United States"')
@@ -27,10 +27,11 @@ def get_jobs(position, company=None):
         print(f"Top 5 job listings for {position}")
         for idx, job in enumerate(jobs[:5], 1):
             print(f"{idx}. {job.get('title', 'N/A')} at {job.get('company_name', 'Unkown Company')}")
+            job_str += job.get('title', 'N/A') + ' at ' + job.get('company_name', 'Unkown Company')
             print(f"Apply here: {job.get('job_url', 'N/A')}")
-        return jobs
+        return job_str
     else: 
         print("Failed to fetch jobs. Try again later.")
         print(f"Status code: {response.status_code}")
         print("response content: ", response.text)
-    return None 
+    return ''

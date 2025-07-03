@@ -88,6 +88,8 @@ if __name__ == "__main__":
     while loop: 
         # dict, organized new user data 
         dataList = collect_data() 
+        # dict to org created data
+        dbData = {}
         resume, cover_letter = generate_tailored_resume(dataList["about"], dataList["exp"], dataList["position"], dataList["company"])
         
         
@@ -96,19 +98,21 @@ if __name__ == "__main__":
         # print out link to resume pdf and cover letter 
         print("Creating your resume and cover letter...")
         print("...")
-        time.sleep(1)
 
         #resume + cover letter PDFMonkey Link 
-        generate_pdf(dataList, resume, cover_letter)
+        dbData["pdf"] = generate_pdf(dataList, resume, cover_letter)
 
         print("Here is a list of jobs you can apply to!")
         try: 
-            jobs = get_jobs(dataList['position'], dataList['company'])
+            dbData["jobs"] = get_jobs(dataList['position'], dataList['company'])
 
+        except: 
+            print("Error getting jobs, saved only the resume.")
+        
         print("Would you like to save this resume + cover letter in the database? Y/N")
         saveCreation = input("> ").strip()
         if saveCreation == "Y":
-            save_info(dataList) #replace dataList with resume and coverletter 
+            save_info(dbData) #replace dataList with resume and coverletter 
 
         # prompting for the user to create more  
         # create loop if does not fit in Y/N 

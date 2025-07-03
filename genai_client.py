@@ -10,7 +10,7 @@ Return dictionary with resume and cover_letter keys.
 
 load_dotenv()
 #my_api_key = os.getenv("GENAIAPI_KEY") or os.getenv("GOOGLE_API_KEY")
-my_api_key= "key"
+my_api_key= "AIzaSyCR-qlyruPuiR5X0Aj6zfM8RwbNSXkvOqw"
 genai.configure(api_key=my_api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -19,6 +19,8 @@ def generate_tailored_resume(about, experience, position, company):
 You are a resume and cover letter expert.
 
 Create a professional resume and cover letter for someone applying to the position of {position} at {company}.
+We have already created a HTML/CSS template for you for contact information. 
+Therefore, you do not need to include their name/contact information at the top. It is already provided.  
 
 Use the following inputs:
 - LinkedIn "About Me": {about}
@@ -47,32 +49,3 @@ Cover Letter:
 
     return resume, cover_letter
 
-
-"""
-if __name__ == "__main__":
-    data = collect_data()
-
-    resume, cover_letter = generate_tailored_resume(
-        about=data["about"],
-        experience=data["exp"],
-        position=data["position"],
-        company=data["company"],
-    )
-
-    pdf_data = {
-        "name": data["name"],
-        "email": data["email"],
-        "position": data["position"],
-        "company": data["company"],
-        "resume": resume,
-        "cover_letter": cover_letter
-    }
-
-    generate_pdf(pdf_data)
-
-    print("\nTailored Resume:\n")
-    print(resume)
-
-    print("\nTailored Cover Letter:\n")
-    print(cover_letter)
-"""

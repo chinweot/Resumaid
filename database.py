@@ -25,7 +25,18 @@ def print_db(): # printing all contents from database
     if result:
         columns = result[0]._fields if hasattr(result[0], '_fields') else ['pdf', 'jobs']
         df = pd.DataFrame(result, columns=columns)
-        print(df.to_string())
+
+        print("\n====DATABASE ENTRIES====")
+        for index, row in df.iterrows():
+            print(f"\nEntry #{index+1}")
+            print('-' * 30)
+            print(f"PDF Link:\n{row['pdf']}")
+            print('\nJobs:')
+            jobs_text = row['jobs']
+            for job in jobs_text.split("at"):
+                job = job.strip()
+                if job:
+                    print(f"- {job} at")
 
     else: 
         print("Database empty.")

@@ -10,7 +10,7 @@ Return dictionary with resume and cover_letter keys.
 
 load_dotenv()
 #my_api_key = os.getenv("GENAIAPI_KEY") or os.getenv("GOOGLE_API_KEY")
-my_api_key= "AIzaSyCR-qlyruPuiR5X0Aj6zfM8RwbNSXkvOqw"
+my_api_key= ""
 genai.configure(api_key=my_api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 

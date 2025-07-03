@@ -7,8 +7,8 @@ load_dotenv()
 #PDFMONKEY_API_KEY = os.getenv("PDFMONKEY_API_KEY")
 #PDFMONKEY_TEMPLATE_ID = os.getenv("PDFMONKEY_TEMPLATE_ID")
 
-PDFMONKEY_API_KEY = "RrqcF3ysjdtTvasN5ouz"
-PDFMONKEY_TEMPLATE_ID = "B2148D58-F8D9-4325-AB86-9421B1D28B7E"
+PDFMONKEY_API_KEY = ""
+PDFMONKEY_TEMPLATE_ID = ""
 
 def generate_pdf(data, resume, cover_letter):
     url = "https://api.pdfmonkey.io/api/v1/documents"

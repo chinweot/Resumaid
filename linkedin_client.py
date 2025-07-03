@@ -4,7 +4,7 @@ import os
 
 def get_jobs(position, company=None):
 
-    API_KEY = "e57417e85cmsh091ef9329cd379ep11aefbjsn8bb4545c21fb"
+    API_KEY = "KEY"
                 
     print("API KEY FOUND:", API_KEY is not None)
     print("API_KEY:", API_KEY)

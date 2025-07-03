@@ -88,7 +88,7 @@ if __name__ == "__main__":
     while loop: 
         # dict, organized new user data 
         dataList = collect_data() 
-        resume, cover_letter = generate_tailored_resume(about, exp, position, company)
+        resume, cover_letter = generate_tailored_resume(dataList["about"], dataList["exp"], dataList["position"], dataList["company"])
         
         
         print("Your data was saved successfully.")
@@ -102,7 +102,8 @@ if __name__ == "__main__":
         generate_pdf(dataList, resume, cover_letter)
 
         print("Here is a list of jobs you can apply to!")
-        get_jobs(dataList['position'], dataList['company'])
+        try: 
+            jobs = get_jobs(dataList['position'], dataList['company'])
 
         print("Would you like to save this resume + cover letter in the database? Y/N")
         saveCreation = input("> ").strip()

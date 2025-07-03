@@ -1,6 +1,5 @@
 import os
 import google.generativeai as genai
-from input import collect_data
 from dotenv import load_dotenv
 from pdf_generator import generate_pdf
 
@@ -10,7 +9,8 @@ Return dictionary with resume and cover_letter keys.
 """
 
 load_dotenv()
-my_api_key = os.getenv("GENAIAPI_KEY") or os.getenv("GOOGLE_API_KEY")
+#my_api_key = os.getenv("GENAIAPI_KEY") or os.getenv("GOOGLE_API_KEY")
+my_api_key= "key"
 genai.configure(api_key=my_api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -75,3 +75,4 @@ if __name__ == "__main__":
 
     print("\nTailored Cover Letter:\n")
     print(cover_letter)
+"""

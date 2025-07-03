@@ -4,7 +4,7 @@ import os
 
 def get_jobs(position, company=None):
 
-    API_KEY = os.getenv("RAPIDAPI_KEY")
+    API_KEY = "key"
 
     title_filter = quote(f'"{position}"')
     location_filter = quote('"United States"')
@@ -28,7 +28,9 @@ def get_jobs(position, company=None):
         for idx, job in enumerate(jobs[:5], 1):
             print(f"{idx}. {job.get('title', 'N/A')} at {job.get('company_name', 'Unkown Company')}")
             print(f"Apply here: {job.get('job_url', 'N/A')}")
+        return jobs
     else: 
         print("Failed to fetch jobs. Try again later.")
         print(f"Status code: {response.status_code}")
         print("response content: ", response.text)
+    return None 

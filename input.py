@@ -1,4 +1,5 @@
 from database import save_info, print_db 
+from linkedin_client import get_jobs
 import re 
 import time 
 
@@ -43,7 +44,8 @@ def get_input(prompt):
             print_database()
             continue
 
-        user_input = empty_input(user_input)
+        if prompt != "If applying to a specific company, insert its name; otherwise leave blank: ":
+            user_input = empty_input(user_input)
 
         if prompt == "Insert email: ":
             user_input = valid_email(user_input)
@@ -92,14 +94,13 @@ if __name__ == "__main__":
         print("...")
         time.sleep(1)
 
-        #resume 
+        #resume + cover letter PDFMonkey Link 
 
-        print("...")
-        time.sleep(1)
-        #cover letter 
+        print("Here is a list of jobs you can apply to!")
+        get_jobs(dataList['position'], dataList['company'])
 
         print("Would you like to save this resume + cover letter in the database? Y/N")
-        saveCreation = input("> ")
+        saveCreation = input("> ").strip()
         if saveCreation == "Y":
             save_info(dataList) #replace dataList with resume and coverletter 
 
